@@ -65,6 +65,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			//Get the default settings from APN
 			  @SuppressWarnings("deprecation")
 			String proxyHost = android.net.Proxy.getDefaultHost();
+			  @SuppressWarnings("deprecation")
 			  int proxyPort = android.net.Proxy.getDefaultPort();
 			//Set Proxy params of client, if they are not the standard
 			    if (proxyHost != null && proxyPort > 0) {
