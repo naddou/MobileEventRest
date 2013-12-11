@@ -1,19 +1,19 @@
 package com.android.mobileevent;
 
 public class Utilisateur {
-	private String login;
+	private String nom;
 	private String courriel;
 	private Sondage sondage;
 	
-	Utilisateur(String login, String courriel)
+	Utilisateur(String nom, String courriel)
 	{
-		this.login = login;
+		this.nom = nom;
 		this.courriel = courriel;
 	}
 	
-	public String getLogin()
+	public String getNom()
 	{
-		return this.login;
+		return this.nom;
 	}
 	
 	public String getCourriel()
