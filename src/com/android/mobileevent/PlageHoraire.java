@@ -16,6 +16,15 @@ public class PlageHoraire {
 	 * Setters
 	 */
 	
+	public String getJour()
+	{
+		return this.jour;
+	}
+	
+	/**
+	 * Setters
+	 */
+	
 	public void setHeureDebut(String heureDebut)
 	{
 		this.heureDebut = heureDebut;

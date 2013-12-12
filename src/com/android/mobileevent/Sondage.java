@@ -1,19 +1,18 @@
 package com.android.mobileevent;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Sondage {
-	private ArrayList<Date> plageHoraire;
+	private ArrayList<PlageHoraire> plageHoraire;
 	private ArrayList<String> optionDeChoix;
-	private String typeSondage;
+	private TypeSondage typeSondage;
 	private String titreSondage;
 	private Utilisateur initiateur;
 	private ArrayList<Utilisateur> participant;
 	
-	Sondage(String typeSondage, String titreSondage, Utilisateur initiateur)
+	Sondage(TypeSondage typeSondage, String titreSondage, Utilisateur initiateur)
 	{
-		this.plageHoraire = new ArrayList<Date>();
+		this.plageHoraire = new ArrayList<PlageHoraire>();
 		this.optionDeChoix = new ArrayList<String>();
 		this.typeSondage = typeSondage;
 		this.titreSondage = titreSondage;
@@ -25,7 +24,7 @@ public class Sondage {
 	 * Getters
 	 */
 	
-	public String getTypeSondage()
+	public TypeSondage getTypeSondage()
 	{
 		return this.typeSondage;
 	}
@@ -34,7 +33,7 @@ public class Sondage {
 	 * Setters
 	 */
 	
-	public void setPlageHoraire(Date plageHoraire)
+	public void setPlageHoraire(PlageHoraire plageHoraire)
 	{
 		this.plageHoraire.add(plageHoraire);
 	}
@@ -55,8 +54,62 @@ public class Sondage {
 	 */
 	public String serialiserSondage()
 	{
-		return null;
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("<poll xmlns=\"http://doodle.com/xsd1\">");
+		
+		buffer.append("<type>");
+		
+		if(TypeSondage.DATE == this.typeSondage)
+		{
+			buffer.append("DATE");
+		}
+		else
+		{
+			buffer.append("TEXT");
+		}
+		
+		buffer.append("</type>");
+		
+		buffer.append("<hidden>false</hidden>");
+		buffer.append("<levels>2</levels>");
+		buffer.append("<title>" + this.titreSondage + "</title>");
+		
+		buffer.append("<initiator>");
+		buffer.append("<name>" + this.initiateur.getNom() + "</name>"); 
+		buffer.append("<eMailAddress>" + this.initiateur.getCourriel() + "</eMailAddress>");
+		buffer.append("</initiator>");
+		
+		buffer = serialiserLesBalisesOptions(buffer, this.typeSondage);
+		
+		buffer.append("</poll>");
+		
+		return buffer.toString();
 	}
+	
+	private StringBuffer serialiserLesBalisesOptions(StringBuffer buffer, TypeSondage type)
+	{
+		buffer.append("<options>"); 
+		
+		if(TypeSondage.DATE == type)
+		{
+			for(PlageHoraire plage : this.plageHoraire)
+			{
+				buffer.append("<option date=\"" + plage.getJour() + "\"></option>");
+			}
+		}
+		else
+		{
+			for(String choix : this.optionDeChoix)
+			{
+				buffer.append("<option>" + choix + "</option>");
+			}
+		}
+		
+		buffer.append("</options>"); 
+		
+		return buffer;
+	}
+	
 	
 	/**
 	 * Deserialiser le sondage
