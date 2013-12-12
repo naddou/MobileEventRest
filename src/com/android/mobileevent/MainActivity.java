@@ -2,6 +2,10 @@ package com.android.mobileevent;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -11,6 +15,8 @@ import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.w3c.dom.Document;
+
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,9 +50,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		new LongRunningGetIO().execute();
 		}
 	
-    private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
+	private class LongRunningGetIO extends AsyncTask <Void, Void, Document> {
+    //private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		
-		protected String getASCIIContentFromEntity(HttpEntity entity) throws IllegalStateException, IOException {
+		/*protected String getASCIIContentFromEntity(HttpEntity entity) throws IllegalStateException, IOException {
 	       InputStream in = entity.getContent();
 	         StringBuffer out = new StringBuffer();
 	         int n = 1;
@@ -57,9 +64,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	         }
 	         return out.toString();
 	    }
-		
+		*/
 		@Override
-		protected String doInBackground(Void... params) {
+		protected Document doInBackground(Void... params) {
 			HttpClient client = new DefaultHttpClient();
 
 			//Get the default settings from APN
@@ -72,7 +79,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			        HttpHost proxy = new HttpHost(proxyHost, proxyPort);
 			        client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 			    }
-			 HttpContext localContext = new BasicHttpContext();
+			 /*HttpContext localContext = new BasicHttpContext();
              HttpGet httpGet = new HttpGet("http://doodle-test.com/api1WithoutAccessControl/polls/bxtfvni8kgbm4ifx");
              String text = null;
              try {
@@ -83,13 +90,44 @@ public class MainActivity extends Activity implements OnClickListener {
             	 return e.getLocalizedMessage();
              }
              return text;
+             */
+			    
+			 HttpContext localContext = new BasicHttpContext();
+	         HttpGet httpGet = new HttpGet("http://doodle-test.com/api1WithoutAccessControl/polls/bxtfvni8kgbm4ifx");
+	         Document doc;
+	         
+	         try {
+	        	 	HttpResponse response = client.execute(httpGet, localContext);
+	                HttpEntity entity = response.getEntity();
+	                   
+	                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	                DocumentBuilder db = dbf.newDocumentBuilder();
+	                doc = db.parse(entity.getContent());
+	             } catch (Exception e) {
+	            	 return null;
+	             }
+	             return doc;
 		}	
 		
-		protected void onPostExecute(String results) {
+		/*protected void onPostExecute(String results) {
 			if (results!=null) {
 				EditText et = (EditText)findViewById(R.id.my_edit);
 				et.setText(results);
 			}
+			Button b = (Button)findViewById(R.id.my_button);
+			b.setClickable(true);
+		}
+		*/
+		protected void onPostExecute(Document doc) {
+			if (doc != null) {
+				EditText et = (EditText)findViewById(R.id.my_edit);
+				Sondage sondage = new Sondage();
+				
+				sondage.deserialiserSondage(doc);
+				
+				et.setText(sondage.toString());
+			}
+			
 			Button b = (Button)findViewById(R.id.my_button);
 			b.setClickable(true);
 		}

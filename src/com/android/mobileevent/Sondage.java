@@ -2,6 +2,11 @@ package com.android.mobileevent;
 
 import java.util.ArrayList;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 public class Sondage {
 	private ArrayList<PlageHoraire> plageHoraire;
 	private ArrayList<String> optionDeChoix;
@@ -9,6 +14,16 @@ public class Sondage {
 	private String titreSondage;
 	private Utilisateur initiateur;
 	private ArrayList<Utilisateur> participant;
+	
+	Sondage()
+	{
+		this.plageHoraire = new ArrayList<PlageHoraire>();
+		this.optionDeChoix = new ArrayList<String>();
+		this.typeSondage = null;
+		this.titreSondage = null;
+		this.initiateur = null;
+		this.participant = new ArrayList<Utilisateur>();
+	}
 	
 	Sondage(TypeSondage typeSondage, String titreSondage, Utilisateur initiateur)
 	{
@@ -115,8 +130,77 @@ public class Sondage {
 	 * Deserialiser le sondage
 	 * @param docXml
 	 */
-	public void deserialiserSondage(String docXml)
+	public void deserialiserSondage(Document doc)
 	{
+		// Recuperer le type du sondage
+		doc.getDocumentElement().normalize(); 
+		Node noeudType = doc.getElementsByTagName("type").item(0);
 		
+		if(noeudType.getTextContent().equals("DATE"))
+		{
+			this.typeSondage = TypeSondage.DATE;
+		}
+		else
+		{
+			this.typeSondage = TypeSondage.TEXT;
+		}
+		
+		// Recuperer le titre du sondage
+		Node noeudTitre = doc.getElementsByTagName("title").item(0);	
+		this.titreSondage = noeudTitre.getTextContent();
+		
+		// Recuperer les options du sondage (plage horaire ou option de choix)
+		Node options = doc.getElementsByTagName("options").item(0);
+		NodeList optionList = options.getChildNodes();
+		
+		int tailleNodeList = optionList.getLength();
+		
+		if(this.typeSondage == TypeSondage.DATE)
+		{
+			for(int i = 0; i < tailleNodeList; i += 1)
+			{
+				Element element = (Element)optionList.item(i);
+				this.plageHoraire.add(new PlageHoraire(element.getAttribute("date")));
+			}
+		}
+		else
+		{
+			for(int i = 0; i < tailleNodeList; i += 1)
+			{
+				Node node = optionList.item(i);
+				this.optionDeChoix.add(node.getTextContent());
+			}
+		}
 	}
+
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("Titre: " + this.titreSondage + "\n");
+		
+		if(this.typeSondage == TypeSondage.DATE)
+		{
+			int taillePlageHoraire = this.plageHoraire.size();
+			buffer.append("Plage horaie: ");
+			
+			for(int i = 0; i < taillePlageHoraire; i += 1)
+			{
+				buffer.append(" " + this.plageHoraire.get(i).getJour());
+			}
+		}
+		else
+		{
+			int tailleOptionDeChoix = this.optionDeChoix.size();
+			buffer.append("Options: ");
+			
+			for(int i = 0; i < tailleOptionDeChoix; i += 1)
+			{
+				buffer.append(" " + this.optionDeChoix.get(i));
+			}
+		}
+		
+		return buffer.toString();
+	}
+	
+	
 }
