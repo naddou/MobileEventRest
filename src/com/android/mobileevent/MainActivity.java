@@ -17,6 +17,8 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.w3c.dom.Document;
 
+//import com.projet.mobilEvent.R;
+
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,6 +35,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		findViewById(R.id.my_button).setOnClickListener(this);
+//		Button buttonConnected = (Button) findViewById(R.id.save);
+//		buttonConnected.setOnClickListener(this);
+		
 	}
 
 	@Override

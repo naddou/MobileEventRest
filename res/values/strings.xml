@@ -4,5 +4,16 @@
     <string name="app_name">MobileEvent</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+<string name="station_prompt">Stations</string>
+    <string name="creer">creer</string>
+    <string name="consulter">consulter</string>
+    <string name="effacer">effacer</string>
 
+    <string-array name="station_arrays">
+        <item>connected</item>
+        <item>Disconnected</item>
+    </string-array>
+
+    <string name="title_activity_events_menu">EventsMenuActivity</string>
+    
 </resources>
