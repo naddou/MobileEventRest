@@ -12,13 +12,11 @@ public class ServiceWebRest {
 	
 	public String executerRequeteGet(String params)
 	{
-		
 		return null;
 	}
 	
 	public String executerRequetePost(String params)
 	{
-		
 		return null;
 	}
 }
