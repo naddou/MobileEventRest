@@ -36,53 +36,56 @@ public final class R {
         public static final int ic_launcher=0x7f020009;
     }
     public static final class id {
-        public static final int action_settings=0x7f090024;
-        public static final int editText1=0x7f090007;
-        public static final int editTextEmail=0x7f09001e;
-        public static final int editTextEmailChoix=0x7f090010;
-        public static final int editTextJour1=0x7f090021;
-        public static final int editTextJour2=0x7f090022;
-        public static final int editTextJour3=0x7f090023;
-        public static final int editTextNom=0x7f09001b;
-        public static final int editTextNomChoix=0x7f09000d;
-        public static final int editTextOptionChoix1=0x7f090013;
-        public static final int editTextOptionChoix2=0x7f090014;
-        public static final int editTextOptionChoix3=0x7f090015;
-        public static final int editTextTitre=0x7f090018;
-        public static final int editTextTitreChoix=0x7f09000a;
+        public static final int action_settings=0x7f090025;
+        public static final int editText1=0x7f090008;
+        public static final int editTextEmail=0x7f09001f;
+        public static final int editTextEmailChoix=0x7f090011;
+        public static final int editTextJour1=0x7f090022;
+        public static final int editTextJour2=0x7f090023;
+        public static final int editTextJour3=0x7f090024;
+        public static final int editTextNom=0x7f09001c;
+        public static final int editTextNomChoix=0x7f09000e;
+        public static final int editTextOptionChoix1=0x7f090014;
+        public static final int editTextOptionChoix2=0x7f090015;
+        public static final int editTextOptionChoix3=0x7f090016;
+        public static final int editTextTitre=0x7f090019;
+        public static final int editTextTitreChoix=0x7f09000b;
+        public static final int lick2=0x7f090007;
         public static final int my_button=0x7f090001;
         public static final int my_edit=0x7f090002;
         public static final int password=0x7f090005;
         public static final int save=0x7f090006;
         public static final int screenName=0x7f090004;
         public static final int status=0x7f090003;
-        public static final int tableRowEmail=0x7f09001c;
-        public static final int tableRowEmailChoix=0x7f09000e;
-        public static final int tableRowJours=0x7f090020;
-        public static final int tableRowNom=0x7f090019;
-        public static final int tableRowNomChoix=0x7f09000b;
-        public static final int tableRowOptionsChoix=0x7f090012;
-        public static final int tableRowTitre=0x7f090016;
-        public static final int tableRowTitreChoix=0x7f090008;
+        public static final int tableRowEmail=0x7f09001d;
+        public static final int tableRowEmailChoix=0x7f09000f;
+        public static final int tableRowJours=0x7f090021;
+        public static final int tableRowNom=0x7f09001a;
+        public static final int tableRowNomChoix=0x7f09000c;
+        public static final int tableRowOptionsChoix=0x7f090013;
+        public static final int tableRowTitre=0x7f090017;
+        public static final int tableRowTitreChoix=0x7f090009;
         public static final int textView1=0x7f090000;
-        public static final int textViewEmail=0x7f09001d;
-        public static final int textViewEmailChoix=0x7f09000f;
-        public static final int textViewJours=0x7f09001f;
-        public static final int textViewNom=0x7f09001a;
-        public static final int textViewNomChoix=0x7f09000c;
-        public static final int textViewOptionsChoix=0x7f090011;
-        public static final int textViewTitre=0x7f090017;
-        public static final int textViewTitreChoix=0x7f090009;
+        public static final int textViewEmail=0x7f09001e;
+        public static final int textViewEmailChoix=0x7f090010;
+        public static final int textViewJours=0x7f090020;
+        public static final int textViewNom=0x7f09001b;
+        public static final int textViewNomChoix=0x7f09000d;
+        public static final int textViewOptionsChoix=0x7f090012;
+        public static final int textViewTitre=0x7f090018;
+        public static final int textViewTitreChoix=0x7f09000a;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int connection=0x7f030001;
-        public static final int presentation=0x7f030002;
-        public static final int sondage_choix=0x7f030003;
-        public static final int sondage_event=0x7f030004;
+        public static final int activity_consulter=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int connection=0x7f030002;
+        public static final int presentation=0x7f030003;
+        public static final int sondage_choix=0x7f030004;
+        public static final int sondage_event=0x7f030005;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int consulter=0x7f080000;
+        public static final int main=0x7f080001;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -96,6 +99,7 @@ public final class R {
         public static final int nom=0x7f05000a;
         public static final int options_choix=0x7f05000d;
         public static final int station_prompt=0x7f050003;
+        public static final int title_activity_consulter=0x7f05000e;
         public static final int title_activity_events_menu=0x7f050008;
         public static final int titre=0x7f050009;
         public static final int user=0x7f050007;

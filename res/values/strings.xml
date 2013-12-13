@@ -9,6 +9,7 @@
     <string name="consulter">consulter</string>
     <string name="effacer">effacer</string>
     <string name="user">User</string>
+
     <string-array name="station_arrays">
         <item>connected</item>
         <item>Disconnected</item>
@@ -19,5 +20,7 @@
     <string name="nom">Nom</string>
     <string name="e_mail">E-mail</string>
     <string name="jours">Jours</string>
-	<string name="options_choix">Options</string>
+    <string name="options_choix">Options</string>
+    <string name="title_activity_consulter">Consulter</string>
+
 </resources>

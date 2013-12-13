@@ -14,15 +14,17 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.w3c.dom.Document;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
-import android.widget.Button;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class EventsMenuActivity extends Activity {
+public class EventsMenuActivity extends Activity implements OnClickListener{
 	String userName ;
 	String password ;
 	@Override
@@ -41,9 +43,9 @@ public class EventsMenuActivity extends Activity {
 		
 		et.setText(userName+"\n");
 		
-//		TextView textview=(TextView)findViewById(R.id.textView1);
-//		
-//		textview.append(userName.toString());
+		TextView txtView = (TextView)findViewById(R.id.lick2) ;
+		
+		txtView.setOnClickListener(this);
 		
 		new LongRunningGetIO().execute();
 		
@@ -103,6 +105,19 @@ public class EventsMenuActivity extends Activity {
 					et.setText(sondage.toString());
 				}
 			}			
+	}
+
+
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		System.out.println("sadsa");
+		
+		Intent intentEventsMenuActiviry = new Intent(EventsMenuActivity.this, Consulter.class);
+		
+		EventsMenuActivity.this.startActivity(intentEventsMenuActiviry);
+		
 	}
 
 }

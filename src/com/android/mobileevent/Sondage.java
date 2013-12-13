@@ -8,12 +8,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Sondage {
-	private ArrayList<PlageHoraire> plageHoraire;
-	private ArrayList<String> optionDeChoix;
-	private TypeSondage typeSondage;
-	private String titreSondage;
-	private Utilisateur initiateur;
-	private ArrayList<Utilisateur> participant;
+	public ArrayList<PlageHoraire> plageHoraire;
+	public ArrayList<String> optionDeChoix;
+	public TypeSondage typeSondage;
+	public String titreSondage;
+	public Utilisateur initiateur;
+	public ArrayList<Utilisateur> participant;
 	
 	Sondage()
 	{
@@ -25,6 +25,50 @@ public class Sondage {
 		this.participant = new ArrayList<Utilisateur>();
 	}
 	
+	public ArrayList<PlageHoraire> getPlageHoraire() {
+		return plageHoraire;
+	}
+
+	public void setPlageHoraire(ArrayList<PlageHoraire> plageHoraire) {
+		this.plageHoraire = plageHoraire;
+	}
+
+	public ArrayList<String> getOptionDeChoix() {
+		return optionDeChoix;
+	}
+
+	public void setOptionDeChoix(ArrayList<String> optionDeChoix) {
+		this.optionDeChoix = optionDeChoix;
+	}
+
+	public String getTitreSondage() {
+		return titreSondage;
+	}
+
+	public void setTitreSondage(String titreSondage) {
+		this.titreSondage = titreSondage;
+	}
+
+	public Utilisateur getInitiateur() {
+		return initiateur;
+	}
+
+	public void setInitiateur(Utilisateur initiateur) {
+		this.initiateur = initiateur;
+	}
+
+	public ArrayList<Utilisateur> getParticipant() {
+		return participant;
+	}
+
+	public void setParticipant(ArrayList<Utilisateur> participant) {
+		this.participant = participant;
+	}
+
+	public void setTypeSondage(TypeSondage typeSondage) {
+		this.typeSondage = typeSondage;
+	}
+
 	Sondage(TypeSondage typeSondage, String titreSondage, Utilisateur initiateur)
 	{
 		this.plageHoraire = new ArrayList<PlageHoraire>();
