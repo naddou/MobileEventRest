@@ -176,16 +176,16 @@ public class Sondage {
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("Titre: " + this.titreSondage + "\n");
+		buffer.append("Titre: " + this.titreSondage + "\n\n");
 		
 		if(this.typeSondage == TypeSondage.DATE)
 		{
 			int taillePlageHoraire = this.plageHoraire.size();
-			buffer.append("Plage horaie: ");
+			buffer.append("Dates :");
 			
 			for(int i = 0; i < taillePlageHoraire; i += 1)
 			{
-				buffer.append(" " + this.plageHoraire.get(i).getJour());
+				buffer.append("   " + this.plageHoraire.get(i).getJour());
 			}
 		}
 		else

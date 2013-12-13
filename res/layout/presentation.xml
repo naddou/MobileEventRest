@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BEDEFF"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#BEDEFF"
+        android:drawablePadding="5dp"
+        android:drawableRight="@drawable/connect3"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:text="@string/user" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5F9DFA"
+        android:drawableLeft="@drawable/ic_launcher"
+        android:drawablePadding="5dp"
+        android:drawableRight="@drawable/ic_action_new"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:text="@string/creer" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#99CCFF"
+        android:drawableLeft="@drawable/ic_launcher"
+        android:drawablePadding="5dp"
+        android:drawableRight="@drawable/ic_action_go_to_today"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:text="@string/consulter" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5F9DFA"
+        android:drawableLeft="@drawable/ic_launcher"
+        android:drawablePadding="5dp"
+        android:drawableRight="@drawable/ic_action_discard"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:text="@string/effacer" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.40"
+        android:ems="10"
+        tools:ignore="TextFields" >
+
+        <requestFocus />
+    </EditText>
+
+</LinearLayout>

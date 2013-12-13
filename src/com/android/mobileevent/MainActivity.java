@@ -17,13 +17,21 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.w3c.dom.Document;
 
+//import com.projet.mobilEvent.EventsMenuActivity;
+//import com.projet.mobilEvent.MainActivity;
+//import com.projet.mobilEvent.R;
+
+//import com.projet.mobilEvent.R;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.view.Menu;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -31,105 +39,160 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		findViewById(R.id.my_button).setOnClickListener(this);
+		setContentView(R.layout.connection);
+		// findViewById(R.id.my_button).setOnClickListener(this);
+
+		Button buttonConnected = (Button) findViewById(R.id.save);
+		buttonConnected.setOnClickListener(this);
+
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		// getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	public void onClick(View arg0) {
-		Button b = (Button)findViewById(R.id.my_button);
-
-
-		b.setClickable(false);
-		new LongRunningGetIO().execute();
-		}
-	
-	private class LongRunningGetIO extends AsyncTask <Void, Void, Document> {
-    //private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		
-		/*protected String getASCIIContentFromEntity(HttpEntity entity) throws IllegalStateException, IOException {
-	       InputStream in = entity.getContent();
-	         StringBuffer out = new StringBuffer();
-	         int n = 1;
-	         while (n>0) {
-	             byte[] b = new byte[4096];
-	             n =  in.read(b);
-	             if (n>0) out.append(new String(b, 0, n));
-	         }
-	         return out.toString();
-	    }
-		*/
-		@Override
+		if(textViewEmpty())
+		{
+			Toast.makeText(getApplicationContext(), "Information manquante", Toast.LENGTH_SHORT).show();
+			return;
+		}
+			
+		String user = getUsername();
+		String password = getPassword();
+		
+		Intent intentEventsMenuActiviry = new Intent(MainActivity.this, EventsMenuActivity.class);
+		intentEventsMenuActiviry.putExtra("User", user +" "+password);
+		MainActivity.this.startActivity(intentEventsMenuActiviry);
+		
+		//Button b = (Button)findViewById(R.id.my_button);
+
+
+		//b.setClickable(false);
+		//new LongRunningGetIO().execute();
+	}
+
+	public String getPassword() {
+
+		//EditText userName = (EditText) findViewById(R.id.screenName);
+		 EditText password = (EditText)findViewById(R.id.password);
+
+		//String user = userName.getText().toString();
+		 String pass = password.getText().toString();
+		if (pass == null)
+			return null;
+
+		return pass;
+	}
+	
+	public String getUsername() {
+
+		EditText userName = (EditText) findViewById(R.id.screenName);
+		// EditText password = (EditText)findViewById(R.id.password);
+
+		String user = userName.getText().toString();
+		// String pass = password.getText().toString();
+		if (user == null)
+			return null;
+
+		return user;
+	}
+
+	public boolean textViewEmpty() {
+
+		EditText userName = (EditText) findViewById(R.id.screenName);
+		EditText password = (EditText) findViewById(R.id.password);
+
+		String user = userName.getText().toString();
+		String pass = password.getText().toString();
+
+		if (user.length() == 0 || userName.length() == 0)
+			return true;
+		if (pass.length() == 0 || password.length() == 0)
+			return true;
+
+		return false;
+
+	}
+
+	//private class LongRunningGetIO extends AsyncTask<Void, Void, Document> {
+		// private class LongRunningGetIO extends AsyncTask <Void, Void, String>
+		// {
+
+		/*
+		 * protected String getASCIIContentFromEntity(HttpEntity entity) throws
+		 * IllegalStateException, IOException { InputStream in =
+		 * entity.getContent(); StringBuffer out = new StringBuffer(); int n =
+		 * 1; while (n>0) { byte[] b = new byte[4096]; n = in.read(b); if (n>0)
+		 * out.append(new String(b, 0, n)); } return out.toString(); }
+		 */
+		/*@Override
 		protected Document doInBackground(Void... params) {
 			HttpClient client = new DefaultHttpClient();
 
-			//Get the default settings from APN
-			  @SuppressWarnings("deprecation")
+			// Get the default settings from APN
+			@SuppressWarnings("deprecation")
 			String proxyHost = android.net.Proxy.getDefaultHost();
-			  @SuppressWarnings("deprecation")
-			  int proxyPort = android.net.Proxy.getDefaultPort();
-			//Set Proxy params of client, if they are not the standard
-			    if (proxyHost != null && proxyPort > 0) {
-			        HttpHost proxy = new HttpHost(proxyHost, proxyPort);
-			        client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
-			    }
-			 /*HttpContext localContext = new BasicHttpContext();
-             HttpGet httpGet = new HttpGet("http://doodle-test.com/api1WithoutAccessControl/polls/bxtfvni8kgbm4ifx");
-             String text = null;
-             try {
-                   HttpResponse response = client.execute(httpGet, localContext);
-                   HttpEntity entity = response.getEntity();
-                   text = getASCIIContentFromEntity(entity);
-             } catch (Exception e) {
-            	 return e.getLocalizedMessage();
-             }
-             return text;
-             */
-			    
-			 HttpContext localContext = new BasicHttpContext();
-	         HttpGet httpGet = new HttpGet("http://doodle-test.com/api1WithoutAccessControl/polls/bxtfvni8kgbm4ifx");
-	         Document doc;
-	         
-	         try {
-	        	 	HttpResponse response = client.execute(httpGet, localContext);
-	                HttpEntity entity = response.getEntity();
-	                   
-	                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-	                DocumentBuilder db = dbf.newDocumentBuilder();
-	                doc = db.parse(entity.getContent());
-	             } catch (Exception e) {
-	            	 return null;
-	             }
-	             return doc;
-		}	
-		
-		/*protected void onPostExecute(String results) {
-			if (results!=null) {
-				EditText et = (EditText)findViewById(R.id.my_edit);
-				et.setText(results);
+			@SuppressWarnings("deprecation")
+			int proxyPort = android.net.Proxy.getDefaultPort();
+			// Set Proxy params of client, if they are not the standard
+			if (proxyHost != null && proxyPort > 0) {
+				HttpHost proxy = new HttpHost(proxyHost, proxyPort);
+				client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,
+						proxy);
+			}*/
+			/*
+			 * HttpContext localContext = new BasicHttpContext(); HttpGet
+			 * httpGet = new HttpGet(
+			 * "http://doodle-test.com/api1WithoutAccessControl/polls/bxtfvni8kgbm4ifx"
+			 * ); String text = null; try { HttpResponse response =
+			 * client.execute(httpGet, localContext); HttpEntity entity =
+			 * response.getEntity(); text = getASCIIContentFromEntity(entity); }
+			 * catch (Exception e) { return e.getLocalizedMessage(); } return
+			 * text;
+			 */
+
+			/*HttpContext localContext = new BasicHttpContext();
+			HttpGet httpGet = new HttpGet(
+					"http://doodle-test.com/api1WithoutAccessControl/polls/bxtfvni8kgbm4ifx");
+			Document doc;
+
+			try {
+				HttpResponse response = client.execute(httpGet, localContext);
+				HttpEntity entity = response.getEntity();
+
+				DocumentBuilderFactory dbf = DocumentBuilderFactory
+						.newInstance();
+				DocumentBuilder db = dbf.newDocumentBuilder();
+				doc = db.parse(entity.getContent());
+			} catch (Exception e) {
+				return null;
 			}
-			Button b = (Button)findViewById(R.id.my_button);
-			b.setClickable(true);
-		}
-		*/
-		protected void onPostExecute(Document doc) {
+			return doc;
+		}*/
+
+		/*
+		 * protected void onPostExecute(String results) { if (results!=null) {
+		 * EditText et = (EditText)findViewById(R.id.my_edit);
+		 * et.setText(results); } Button b =
+		 * (Button)findViewById(R.id.my_button); b.setClickable(true); }
+		 */
+		/*protected void onPostExecute(Document doc) {
 			if (doc != null) {
-				EditText et = (EditText)findViewById(R.id.my_edit);
+				EditText et = (EditText) findViewById(R.id.my_edit);
 				Sondage sondage = new Sondage();
-				
+
 				sondage.deserialiserSondage(doc);
-				
+
 				et.setText(sondage.toString());
 			}
-			
-			Button b = (Button)findViewById(R.id.my_button);
+
+			Button b = (Button) findViewById(R.id.my_button);
 			b.setClickable(true);
 		}
-    }
+	}*/
 }
