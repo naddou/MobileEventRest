@@ -47,7 +47,7 @@ public class EventsMenuActivity extends Activity implements OnClickListener{
 		
 		txtView.setOnClickListener(this);
 		
-		new LongRunningGetIO().execute();
+		//new LongRunningGetIO().execute();
 		
 	}
 
