@@ -38,10 +38,10 @@ public class EventsMenuActivity extends Activity implements OnClickListener{
 		 userName = splited[0];
 		 password = splited[1];
 //		
-		EditText et = (EditText)findViewById(R.id.editText1);
-		
-		
-		et.setText(userName+"\n");
+//		EditText et = (EditText)findViewById(R.id.editText1);
+//		
+//		
+//		et.setText(userName+"\n");
 		
 		TextView txtView = (TextView)findViewById(R.id.lick2) ;
 		
@@ -60,53 +60,6 @@ public class EventsMenuActivity extends Activity implements OnClickListener{
 	
 	
 	
-	private class LongRunningGetIO extends AsyncTask <Void, Void, Document> {
-
-			@Override
-			protected Document doInBackground(Void... params) {
-				HttpClient client = new DefaultHttpClient();
-
-				//Get the default settings from APN
-				@SuppressWarnings("deprecation")
-				String proxyHost = android.net.Proxy.getDefaultHost();
-				@SuppressWarnings("deprecation")
-				int proxyPort = android.net.Proxy.getDefaultPort();
-				//Set Proxy params of client, if they are not the standard
-				if (proxyHost != null && proxyPort > 0) {
-					HttpHost proxy = new HttpHost(proxyHost, proxyPort);
-					client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
-				}
-				    
-				HttpContext localContext = new BasicHttpContext();
-		        HttpGet httpGet = new HttpGet("http://doodle-test.com/api1WithoutAccessControl/polls/6xcezf6kq7gqn8vt");
-		        Document doc;
-		         
-		        try {
-		         	HttpResponse response = client.execute(httpGet, localContext);
-		            HttpEntity entity = response.getEntity();
-		                   
-		            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		            DocumentBuilder db = dbf.newDocumentBuilder();
-		            doc = db.parse(entity.getContent());
-		        } catch (Exception e) {
-		        	return null;
-		        }
-		             
-		        return doc;
-			}	
-			
-			protected void onPostExecute(Document doc) {
-				if (doc != null) {
-					EditText et = (EditText)findViewById(R.id.editText1);
-					Sondage sondage = new Sondage();
-					
-					sondage.deserialiserSondage(doc);
-					
-					et.setText(sondage.toString());
-				}
-			}			
-	}
-
 
 
 	@Override

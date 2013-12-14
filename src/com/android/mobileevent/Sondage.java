@@ -180,6 +180,12 @@ public class Sondage {
 		doc.getDocumentElement().normalize(); 
 		Node noeudType = doc.getElementsByTagName("type").item(0);
 		
+		// Recuperer les options du sondage (plage horaire ou option de choix)
+		Node noeudInitiateur = doc.getElementsByTagName("initiator").item(0);
+		NodeList listParametres = noeudInitiateur.getChildNodes();
+		
+		this.initiateur = new Utilisateur( ((Element)listParametres.item(0)).getTextContent(), ((Element)listParametres.item(2)).getTextContent(), TypeUtilisateur.INITIATEUR);
+		
 		if(noeudType.getTextContent().equals("DATE"))
 		{
 			this.typeSondage = TypeSondage.DATE;

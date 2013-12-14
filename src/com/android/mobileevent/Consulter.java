@@ -25,6 +25,9 @@ public class Consulter extends Activity {
 	EditText textNom;
 	EditText textTitre;
 	EditText textEmail;
+	EditText jour1;
+	EditText jour2;
+	EditText jour3;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,11 @@ public class Consulter extends Activity {
 		 textNom = (EditText)findViewById(R.id.editTextNom);
 		 textTitre = (EditText)findViewById(R.id.editTextTitre);
 		 textEmail = (EditText)findViewById(R.id.editTextEmail);
+		 
+		 jour1 = (EditText)findViewById(R.id.editTextJour1);
+		 jour2 = (EditText)findViewById(R.id.editTextJour2);
+		 jour3 = (EditText)findViewById(R.id.editTextJour3);
+		 
 		 new LongRunningGetIO().execute();
 	}
 
@@ -86,7 +94,28 @@ public class Consulter extends Activity {
 					
 					sondage.deserialiserSondage(doc);
 					textTitre.setText(sondage.getTitreSondage());
-					//textNom.setText(sondage.getParticipant().get(0));
+					
+					
+					
+					System.out.println(sondage.getInitiateur().getNom().toString());
+					textNom.setText( sondage.getInitiateur().getNom());
+					textEmail.setText(sondage.getInitiateur().getCourriel());
+					
+					if(sondage.getPlageHoraire()==null)
+					{
+						System.out.println("cest null");
+						return;
+					}
+					
+					String Tjour1 = sondage.getPlageHoraire().get(0).getJour().toString();
+					String Tjour2 = sondage.getPlageHoraire().get(1).getJour().toString();
+					String Tjour3 = sondage.getPlageHoraire().get(2).getJour().toString();
+					//String []split = jour.split("-");
+					jour1.setText(Tjour1);
+					jour2.setText(Tjour2);
+					jour3.setText(Tjour3);
+					
+					
 					//et.setText(sondage.toString());
 				}
 			}

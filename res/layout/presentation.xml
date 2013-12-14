@@ -15,7 +15,8 @@
         android:drawableRight="@drawable/connect3"
         android:gravity="center_vertical"
         android:padding="5dp"
-        android:text="@string/user" />
+        android:textColor="#9BFCDA"
+        android:text="connected" />
 
     <TextView
         android:layout_width="match_parent"
@@ -52,16 +53,5 @@
         android:gravity="center_vertical"
         android:padding="5dp"
         android:text="@string/effacer" />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.40"
-        android:ems="10"
-        tools:ignore="TextFields" >
-
-        <requestFocus />
-    </EditText>
 
 </LinearLayout>
